@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div class="hall"></div>
+        <div class="ui-controller">Wybrałeś {{ isSelectedArray.length }} biletów</div>
+    <div class="sits">
+        
+        <div *ngFor="let column of columns" class="sits-group">
+            <button *ngFor="let row of rows" type="button" class="btn btn-default"
+            [class.selected]="isColorSelected(column, row)"
+            (click)="onPress(column,row)"> {{ row }} </button>
+        </div>
+    </div>
+   
+</body>
+</html>
