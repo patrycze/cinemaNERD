@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
+import { TestComponent } from '../test/test.component';
 
 @Component({
   selector: 'hall',
@@ -7,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HallComponent {
   isSelectedArray = [];
-
   rows = Array.apply(null, Array(10)).map((val, idx) => idx+1);
   columns = Array.apply(null, Array(5)).map((val, idx) => idx+1);
-
+  
+ 
 
   onPress(column: number, row: number){
     console.log(column, row);
@@ -34,4 +36,9 @@ export class HallComponent {
     return this.isSelectedArray.findIndex(x => x.column == column && 
       x.row == row) != -1;
   }
+
+  getData(){
+    
+  }
+
 }
