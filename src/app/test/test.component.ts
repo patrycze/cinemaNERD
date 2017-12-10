@@ -4,6 +4,7 @@ import { PostService } from '../services/post.service';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
 import { BadRequestError } from '../common/bad-request-error';
+
 @Component({
   selector: 'test',
   templateUrl: './test.component.html',
@@ -33,13 +34,15 @@ createPost(input: HTMLInputElement) {
       post['id'] = response.json();
       this.posts.splice(0,0,post);
     }, (error: AppError) => {
-      if(error instanceof BadRequestError)
+      if(error instanceof BadRequestError){
         alert('An unexpected error')
       console.log(error);
+      }
+      else throw error;
     })
 }
 deletePost(post) {
-  this.service.deletePost(post.id)
+  this.service.deletePost(345)
     .subscribe(response => {
       let index = this.posts.indexOf(post);
       this.posts.splice(index,1);
@@ -47,11 +50,9 @@ deletePost(post) {
     (error: AppError) => {
       if(error instanceof NotFoundError) {
         alert('The post has been already deleted');
+        console.log('The post has been already deleted')
       } 
-      else {
-        alert('An unexpected error occurred');
-        console.log(error);
-      }
+      else throw error;
     });
 }
 }

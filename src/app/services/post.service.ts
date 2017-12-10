@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
 import { BadRequestError } from '../common/bad-request-error';
-
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw'
 @Injectable()
 export class PostService {
   private url = 'https://jsonplaceholder.typicode.com/posts';
@@ -32,7 +32,7 @@ export class PostService {
         if(error.status === 404)
           return Observable.throw(new NotFoundError());
 
-        return Observable.throw(new AppError(error.json()));
+        return Observable.throw(new AppError(error));
       });
   }
 }
